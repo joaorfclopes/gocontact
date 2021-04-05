@@ -5,8 +5,8 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get("/api").then(function (response) {
-      setData(response.data.message);
+    axios.get("/api/weather/lisbon").then(function (response) {
+      setData(JSON.stringify(response.data.body));
     });
   }, []);
 

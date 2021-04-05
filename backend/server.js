@@ -1,12 +1,11 @@
 import express from "express";
+import weatherRoute from "./routes/weatherRoute.js";
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello World!" });
-});
+app.use("/api/weather", weatherRoute);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
