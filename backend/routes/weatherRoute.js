@@ -14,6 +14,7 @@ weatherRoute.get("/:city", (req, res) => {
       res.json({ body: JSON.parse(response.body) });
     } catch (error) {
       logError(error.response.body);
+      res.json({ body: JSON.parse(error.response.body) });
     }
   })();
 });
