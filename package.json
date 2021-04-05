@@ -1,0 +1,27 @@
+{
+  "name": "gocontact",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-backend": "nodemon backend/server.js",
+    "start-backend": "node backend/server.js",
+    "start-frontend": "cd frontend && yarn start",
+    "start": "concurrently \"yarn start-backend\" \"yarn start-frontend\"",
+    "dev": "concurrently \"yarn dev-backend\" \"yarn start-frontend\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0",
+    "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": "14.15.4"
+  }
+}
