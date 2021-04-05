@@ -5,11 +5,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "setup-backend": "yarn install",
+    "setup-frontend": "cd frontend && yarn install",
     "dev-backend": "nodemon backend/server.js",
     "start-backend": "node backend/server.js",
     "start-frontend": "cd frontend && yarn start",
     "start": "concurrently \"yarn start-backend\" \"yarn start-frontend\"",
-    "dev": "concurrently \"yarn dev-backend\" \"yarn start-frontend\""
+    "dev": "concurrently \"yarn dev-backend\" \"yarn start-frontend\"",
+    "quick-start": "yarn setup-backend && yarn setup-frontend && yarn start"
   },
   "keywords": [],
   "author": "",
