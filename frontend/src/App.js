@@ -1,33 +1,39 @@
 import React, { useState, useEffect } from "react";
+import {
+  CountryDropdown,
+  RegionDropdown as CityDropdown,
+} from "react-country-region-selector";
 import axios from "axios";
+import { countryWhiteList } from "./utils.js";
 
 function App() {
-  const [chosenCity, setChosenCity] = useState("Aveiro");
-  const [city, setCity] = useState("Aveiro");
+  const [country, setCountry] = useState("PT");
+  const [city, setCity] = useState("");
   const [data, setData] = useState(null);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setCity(chosenCity);
-  };
-
   useEffect(() => {
-    axios.get(`/api/weather/${city}`).then(function (response) {
+    axios.get(`/api/weather/${country}/${city}`).then(function (response) {
       setData(JSON.stringify(response.data.body));
     });
-  }, [city]);
+  }, [country, city]);
 
   return (
     <div className="App">
-      <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          value={chosenCity}
-          onChange={(e) => setChosenCity(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-      <p>{!data ? "Loading..." : data}</p>
+      <CountryDropdown
+        value={country}
+        valueType="short"
+        whitelist={countryWhiteList}
+        onChange={(val) => setCountry(val)}
+        defaultOptionLabel="Select Country"
+      />
+      <CityDropdown
+        country={country}
+        countryValueType="short"
+        value={city}
+        onChange={(val) => setCity(val)}
+        defaultOptionLabel="Select City"
+      />
+      <p>{!data ? "Select a city..." : data}</p>
     </div>
   );
 }
