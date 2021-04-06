@@ -1,66 +1,58 @@
 import React, { useState, useEffect } from "react";
-import {
-  CountryDropdown,
-  RegionDropdown as CityDropdown,
-  CountryRegionData as countryRegionData,
-} from "react-country-region-selector";
 import axios from "axios";
-import { countryWhiteList, toArray, formatArrayValues } from "./utils.js";
+import data from "./data.json";
 
 function App() {
   const [country, setCountry] = useState("PT");
-  const [cityArray, setCityArray] = useState(
-    formatArrayValues(
-      toArray(countryRegionData.find((obj) => obj[1] === country)[2])
-    )
-  );
   const [city, setCity] = useState("");
   const [countryData, setCountryData] = useState([]);
   const [cityData, setCityData] = useState(null);
 
-  const selectCountry = (country) => {
-    setCountry(country);
+  const selectedCountryCities = data.find((element) => element.code === country)
+    .cities;
+
+  const selectCountry = (e) => {
+    setCountry(e.target.value);
     setCountryData([]);
-    countryRegionData.map(
-      (countryRegion) =>
-        countryRegion[1] === country &&
-        setCityArray(formatArrayValues(toArray(countryRegion[2])))
-    );
+    setCityData(null);
   };
 
-  const selectCity = (city) => {
-    setCity(city);
-    axios.get(`/api/weather/${country}/${city}`).then(function (response) {
-      setCityData(response.data.body);
-    });
+  const selectCity = (e) => {
+    setCity(e.target.value);
+    axios
+      .get(`/api/weather/${country}/${e.target.value}`)
+      .then(function (response) {
+        setCityData(response.data.body);
+      });
   };
 
   useEffect(() => {
-    cityArray.map((city) =>
-      axios.get(`/api/weather/${country}/${city}`).then(function (response) {
-        setCountryData((countryData) => [...countryData, response.data.body]);
-      })
+    selectedCountryCities.map((city) =>
+      axios
+        .get(`/api/weather/${country}/${city.name}`)
+        .then(function (response) {
+          setCountryData((countryData) => [...countryData, response.data.body]);
+        })
     );
-  }, [cityArray, country]);
+  }, [selectedCountryCities, country]);
 
   return (
     <div className="App">
-      <CountryDropdown
-        value={country}
-        valueType="short"
-        whitelist={countryWhiteList}
-        onChange={(val) => selectCountry(val)}
-        defaultOptionLabel="Select Country"
-      />
-      <CityDropdown
-        id="cityDropdown"
-        country={country}
-        countryValueType="short"
-        value={city}
-        onChange={(val) => selectCity(val)}
-        defaultOptionLabel="Select City"
-        disableWhenEmpty
-      />
+      <select value={country} onChange={(e) => selectCountry(e)}>
+        {data.map((country) => (
+          <option key={country.label} value={country.code}>
+            {country.label}
+          </option>
+        ))}
+      </select>
+      <select value={city} onChange={(e) => selectCity(e)}>
+        <option>Select City</option>
+        {selectedCountryCities.map((city) => (
+          <option key={city.name} value={city.name}>
+            {city.name}
+          </option>
+        ))}
+      </select>
       <h1>Country</h1>
       <p>
         {!countryData

@@ -1,0 +1,107 @@
+[
+  {
+    "label": "Portugal",
+    "code": "PT",
+    "cities": [
+      {
+        "name": "Aveiro"
+      },
+      {
+        "name": "Porto"
+      },
+      {
+        "name": "Lisboa"
+      },
+      {
+        "name": "Coimbra"
+      },
+      {
+        "name": "Ovar"
+      }
+    ]
+  },
+  {
+    "label": "Spain",
+    "code": "ES",
+    "cities": [
+      {
+        "name": "Madrid"
+      },
+      {
+        "name": "Barcelona"
+      },
+      {
+        "name": "Valencia"
+      },
+      {
+        "name": "Seville"
+      },
+      {
+        "name": "Zaragoza"
+      }
+    ]
+  },
+  {
+    "label": "United States",
+    "code": "US",
+    "cities": [
+      {
+        "name": "New York"
+      },
+      {
+        "name": "Los Angeles"
+      },
+      {
+        "name": "Chicago"
+      },
+      {
+        "name": "Houston"
+      },
+      {
+        "name": "Phoenix"
+      }
+    ]
+  },
+  {
+    "label": "England",
+    "code": "GB",
+    "cities": [
+      {
+        "name": "London"
+      },
+      {
+        "name": "Birmingham"
+      },
+      {
+        "name": "Manchester"
+      },
+      {
+        "name": "Glasgow"
+      },
+      {
+        "name": "Liverpool"
+      }
+    ]
+  },
+  {
+    "label": "France",
+    "code": "FR",
+    "cities": [
+      {
+        "name": "Paris"
+      },
+      {
+        "name": "Nice"
+      },
+      {
+        "name": "Lyon"
+      },
+      {
+        "name": "Bordeaux"
+      },
+      {
+        "name": "Marseille"
+      }
+    ]
+  }
+]
