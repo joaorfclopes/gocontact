@@ -1,29 +1,12 @@
-export const countryWhiteList = [
-  "BE",
-  "BG",
-  "CZ",
-  "DK",
-  "DE",
-  "EE",
-  "IE",
-  "EL",
-  "ES",
-  "FR",
-  "HR",
-  "IT",
-  "CY",
-  "LV",
-  "LT",
-  "LU",
-  "HU",
-  "MT",
-  "NL",
-  "AT",
-  "PL",
-  "PT",
-  "RO",
-  "SI",
-  "SK",
-  "FI",
-  "SE",
-];
+export const countryWhiteList = ["PT"];
+
+export const toArray = (str) => {
+  const res = str.split("|");
+  return res;
+};
+
+export const formatArrayValues = (arr) => {
+  let finalArray = [];
+  arr.map((val) => finalArray.push(val.split("~").shift()));
+  return finalArray;
+};
