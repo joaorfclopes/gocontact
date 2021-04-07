@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import { convertToHour } from "../utils";
+import { calcTime, getDate, getOffset } from "../utils";
 
 export default function Table(props) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,7 +18,6 @@ export default function Table(props) {
     if (props.data.length === props.selectedCountryCities.length) {
       setIsLoaded(true);
     }
-    console.log(props.data);
   }, [props]);
 
   return (
@@ -42,10 +41,16 @@ export default function Table(props) {
                       <TableCell>{city.name}</TableCell>
                       <TableCell align="center">{city.main.temp} ºC</TableCell>
                       <TableCell align="center">
-                        {convertToHour(city.sys.sunrise)}
+                        {calcTime(
+                          getDate(city.sys.sunrise),
+                          getOffset(city.timezone)
+                        )}
                       </TableCell>
                       <TableCell align="center">
-                        {convertToHour(city.sys.sunset)}
+                        {calcTime(
+                          getDate(city.sys.sunset),
+                          getOffset(city.timezone)
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}
