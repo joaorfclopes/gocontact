@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { scrollTo } from "../utils";
 
 export default function Form(props) {
   const selectCountry = (e) => {
@@ -15,6 +16,7 @@ export default function Form(props) {
       .then(function (response) {
         props.setCityData(response.data.body);
       });
+    scrollTo("#city");
   };
 
   return (

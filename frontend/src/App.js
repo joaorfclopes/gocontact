@@ -4,6 +4,7 @@ import data from "./data.json";
 import Form from "./components/Form";
 import BarChart from "./components/BarChart";
 import Table from "./components/Table";
+import City from "./components/City";
 
 function App() {
   const [country, setCountry] = useState("PT");
@@ -41,8 +42,7 @@ function App() {
         selectedCountryCities={selectedCountryCities}
       />
       <Table data={countryData} selectedCountryCities={selectedCountryCities} />
-      <h1>Weather in your city ({!cityData ? "select a city" : city})</h1>
-      <p>{!cityData ? "Select a city..." : JSON.stringify(cityData)}</p>
+      <City data={cityData} />
     </div>
   );
 }
