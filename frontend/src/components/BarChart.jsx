@@ -5,7 +5,7 @@ export default function BarChart(props) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const cities = props.data.map((city) => city.name);
-  const temperatures = props.data.map((city) => city.main.temp);
+  const temperatures = props.data.map((city) => city.main.temp.toFixed());
 
   const options = {
     chart: {
@@ -18,7 +18,7 @@ export default function BarChart(props) {
 
   const series = [
     {
-      name: "Weather",
+      name: "Temperature (ºC)",
       data: temperatures,
     },
   ];
