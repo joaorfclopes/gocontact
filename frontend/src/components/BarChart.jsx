@@ -14,6 +14,9 @@ export default function BarChart(props) {
     xaxis: {
       categories: cities,
     },
+    yaxis: {
+      max: 40,
+    },
   };
 
   const series = [

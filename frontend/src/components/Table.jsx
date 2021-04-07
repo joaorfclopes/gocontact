@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
-import {
-  Paper,
-  Table as MaterialUiTable,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import { DataGrid } from "@material-ui/data-grid";
 import { calcTime, getDate, getOffset } from "../utils";
 
 export default function Table(props) {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const columns = [
+    { field: "city", headerName: "City", flex: 1 },
+    { field: "temperature", headerName: "Temperature (ºC)", flex: 1 },
+    { field: "sunrise", headerName: "Sunrise (Hours)", flex: 1 },
+    { field: "sunset", headerName: "Sunset (Hours)", flex: 1 },
+  ];
+
+  const rows = props.data.map((city, index) => {
+    return {
+      id: index,
+      city: city.name,
+      temperature: city.main.temp,
+      sunrise: calcTime(getDate(city.sys.sunrise), getOffset(city.timezone)),
+      sunset: calcTime(getDate(city.sys.sunset), getOffset(city.timezone)),
+    };
+  });
 
   useEffect(() => {
     setIsLoaded(false);
@@ -23,42 +32,7 @@ export default function Table(props) {
   return (
     <>
       {isLoaded && (
-        <div style={{ height: 400, width: "100%" }}>
-          <Paper className="paper">
-            <TableContainer>
-              <MaterialUiTable>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>City</TableCell>
-                    <TableCell align="center">Temperature (ºC)</TableCell>
-                    <TableCell align="center">Sunrise (Hour)</TableCell>
-                    <TableCell align="center">Sunset (Hour)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.data.map((city) => (
-                    <TableRow key={city.name}>
-                      <TableCell>{city.name}</TableCell>
-                      <TableCell align="center">{city.main.temp} ºC</TableCell>
-                      <TableCell align="center">
-                        {calcTime(
-                          getDate(city.sys.sunrise),
-                          getOffset(city.timezone)
-                        )}
-                      </TableCell>
-                      <TableCell align="center">
-                        {calcTime(
-                          getDate(city.sys.sunset),
-                          getOffset(city.timezone)
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </MaterialUiTable>
-            </TableContainer>
-          </Paper>
-        </div>
+        <DataGrid rows={rows} columns={columns} hideFooter autoHeight />
       )}
     </>
   );

@@ -41,8 +41,8 @@ function App() {
         selectedCountryCities={selectedCountryCities}
       />
       <Table data={countryData} selectedCountryCities={selectedCountryCities} />
-      {/*<h1>Weather in your city ({!cityData ? "select a city" : city})</h1>
-      <p>{!cityData ? "Select a city..." : JSON.stringify(cityData)}</p>*/}
+      <h1>Weather in your city ({!cityData ? "select a city" : city})</h1>
+      <p>{!cityData ? "Select a city..." : JSON.stringify(cityData)}</p>
     </div>
   );
 }
