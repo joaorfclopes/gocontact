@@ -8,7 +8,7 @@ weatherRoute.get("/:country/:city", (req, res) => {
   (async () => {
     try {
       const response = await got(
-        `${API_URL}/weather?q=${req.params.city},${req.params.country}&APPID=${API_ID}`
+        `${API_URL}/weather?q=${req.params.city},${req.params.country}&units=metric&APPID=${API_ID}`
       );
       logInfo(response.body);
       res.json({ body: JSON.parse(response.body) });

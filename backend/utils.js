@@ -2,7 +2,7 @@ import log4js from "log4js";
 
 export const API_URL = "https://api.openweathermap.org/data/2.5";
 
-export const API_ID = "27b9e4428d57b0a1eea478389837b2a1";
+export const API_ID = "b6ca5f7934c1f3d3db40d1d847abccaf";
 
 var today = new Date();
 var date =
