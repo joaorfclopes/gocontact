@@ -8,7 +8,7 @@ In the project directory, just run:
 
 ### `yarn quick-start`
 
-Install all the dependencies (for backend and frontend) and runs the app.\
+This will install all the dependencies and run the app.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Hope you like it! :smile:
