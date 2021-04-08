@@ -23,20 +23,22 @@ export default function Form(props) {
   };
 
   const selectCity = (city) => {
-    props.setCity(city);
-    axios
-      .get(`/api/weather/${props.country}/${city.target.innerText}`)
-      .then((response) => {
-        props.setCityData(response.data.body);
-      })
-      .then(() => {
-        $("html, body").animate(
-          {
-            scrollTop: $(".city").offset().top,
-          },
-          800
-        );
-      });
+    try {
+      props.setCity(city.name);
+      axios
+        .get(`/api/weather/${props.country}/${city.name}`)
+        .then((response) => {
+          props.setCityData(response.data.body);
+        })
+        .then(() => {
+          $("html, body").animate(
+            {
+              scrollTop: $(".city").offset().top,
+            },
+            800
+          );
+        });
+    } catch {}
   };
 
   return (
@@ -71,16 +73,16 @@ export default function Form(props) {
             <Grid item xs={12} sm={6}>
               <Autocomplete
                 style={{ textAlign: "left" }}
-                onChange={(city) => selectCity(city)}
+                onChange={(event, city) => selectCity(city)}
                 options={props.selectedCountryCities}
                 getOptionLabel={(city) => city.name}
                 noOptionsText="No city found"
+                autoHighlight
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="Type a City"
                     variant="outlined"
-                    value={props.city}
                   />
                 )}
               />
