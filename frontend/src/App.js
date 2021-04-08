@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import data from "./data.json";
 import Form from "./components/Form";
-import BarChart from "./components/BarChart";
-import Table from "./components/Table";
 import City from "./components/City";
+import Country from "./components/Country";
 
 function App() {
   const [country, setCountry] = useState("PT");
@@ -15,6 +15,29 @@ function App() {
   const selectedCountryCities = data.find((element) => element.code === country)
     .cities;
   const countryLabel = data.find((element) => element.code === country).label;
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+      marginBottom: 20,
+    },
+    formControl: {
+      width: "100%",
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  }));
+
+  const materialUiClasses = useStyles();
 
   useEffect(() => {
     selectedCountryCities.map((city) =>
@@ -35,14 +58,15 @@ function App() {
         setCityData={setCityData}
         selectedCountryCities={selectedCountryCities}
         data={data}
+        classes={materialUiClasses}
       />
-      <h1>Weather in {countryLabel}</h1>
-      <BarChart
+      <Country
+        countryLabel={countryLabel}
         data={countryData}
         selectedCountryCities={selectedCountryCities}
+        classes={materialUiClasses}
       />
-      <Table data={countryData} selectedCountryCities={selectedCountryCities} />
-      <City data={cityData} />
+      <City data={cityData} classes={materialUiClasses} />
     </div>
   );
 }

@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
 export default function BarChart(props) {
-  const [isLoaded, setIsLoaded] = useState(false);
-
   const cities = props.data.map((city) => city.name);
   const temperatures = props.data.map((city) => city.main.temp.toFixed());
 
   const options = {
     chart: {
-      id: "basic-bar",
+      width: "100%",
+      height: 380,
+      type: "bar",
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+      },
     },
     xaxis: {
       categories: cities,
@@ -17,6 +22,21 @@ export default function BarChart(props) {
     yaxis: {
       max: 40,
     },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: false,
+            },
+          },
+          legend: {
+            position: "bottom",
+          },
+        },
+      },
+    ],
   };
 
   const series = [
@@ -26,18 +46,9 @@ export default function BarChart(props) {
     },
   ];
 
-  useEffect(() => {
-    setIsLoaded(false);
-    if (props.data.length === props.selectedCountryCities.length) {
-      setIsLoaded(true);
-    }
-  }, [props]);
-
   return (
-    <>
-      {isLoaded && (
-        <Chart options={options} series={series} type="bar" width="500" />
-      )}
-    </>
+    <div className="bar-chart">
+      <Chart options={options} series={series} type="bar" />
+    </div>
   );
 }

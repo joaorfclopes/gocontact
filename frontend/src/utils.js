@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 export const getDate = (timestamp) => {
   const date = new Date(timestamp * 1000);
   return date;
@@ -15,13 +13,4 @@ export const calcTime = (date, offset) => {
   const nd = new Date(utc + 3600000 * offset);
   const formattedDate = nd.toLocaleTimeString().slice(0, -3);
   return formattedDate;
-};
-
-export const scrollTo = (section) => {
-  $("html, body").animate(
-    {
-      scrollTop: $(`${section}`).offset().top,
-    },
-    800
-  );
 };
