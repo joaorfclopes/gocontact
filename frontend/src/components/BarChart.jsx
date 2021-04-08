@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 
 export default function BarChart(props) {
   const cities = props.data.map((city) => city.name);
-  const temperatures = props.data.map((city) => city.main.temp.toFixed());
+  const temperatures = props.data.map((city) => Math.round(city.main.temp));
 
   const options = {
     chart: {
@@ -11,9 +11,10 @@ export default function BarChart(props) {
       height: 380,
       type: "bar",
     },
-    plotOptions: {
-      bar: {
-        horizontal: true,
+    dataLabels: {
+      enabled: true,
+      formatter: function (value) {
+        return value + "º";
       },
     },
     xaxis: {
@@ -21,22 +22,12 @@ export default function BarChart(props) {
     },
     yaxis: {
       max: 40,
-    },
-    responsive: [
-      {
-        breakpoint: 1000,
-        options: {
-          plotOptions: {
-            bar: {
-              horizontal: false,
-            },
-          },
-          legend: {
-            position: "bottom",
-          },
+      labels: {
+        formatter: function (value) {
+          return value + "º";
         },
       },
-    ],
+    },
   };
 
   const series = [

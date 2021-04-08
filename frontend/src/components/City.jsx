@@ -38,7 +38,7 @@ export default function City(props) {
                         Max (ºC)
                       </Typography>
                       <Typography variant="h5" component="h2">
-                        {props.data.main.temp_max}
+                        {props.data.main.temp_max}º
                       </Typography>
                     </CardContent>
                   </Card>

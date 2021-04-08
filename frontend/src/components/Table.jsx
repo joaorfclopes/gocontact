@@ -14,7 +14,7 @@ export default function Table(props) {
     return {
       id: index,
       city: city.name,
-      temperature: `${city.main.temp.toFixed()}º`,
+      temperature: Math.round(city.main.temp),
       sunrise: calcTime(getDate(city.sys.sunrise), getOffset(city.timezone)),
       sunset: calcTime(getDate(city.sys.sunset), getOffset(city.timezone)),
     };
